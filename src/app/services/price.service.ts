@@ -16,7 +16,7 @@ export class PriceService {
 
   calculatePrice(form: string , qty: number , productId: number): Observable<PriceResult> {
     const urlString = BASE_URL + '?productForm=' + form + '&qty=' + qty + '&productId=' + productId;
-
+    console.log(urlString);
     return this.http.get<PriceResult>(urlString);
   }
 }

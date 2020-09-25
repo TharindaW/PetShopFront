@@ -25,29 +25,39 @@ export class CartComponent implements OnInit {
 
   addProductToCart(product: Product) {
 
-
-    let priceResult: PriceResult = null;
-
-    this.priceService.calculatePrice('CARTON', 1, product.productId).subscribe((price) => {
-      console.log(price);
-      priceResult = price;
-    });
-
+    let cartItem = null;
 
     let foundInCart = false;
-    for (let i in this.cartItems) {
+    for (const i in this.cartItems) {
       if (this.cartItems[i].id === product.productId) {
         this.cartItems[i].qty++;
+        cartItem = i;
         foundInCart = true;
         break;
       }
     }
 
-    if (!foundInCart) {
-      this.cartItems.push({ id: product.productId, qty: 1, name: product.name, price: product.cartonPrice });
-    }
+    let priceResult: PriceResult = null;
 
-    this.cartItems.forEach(item => { this.total += item.qty * item.price; });
+    
+    if (!foundInCart) {
+      this.priceService.calculatePrice('CARTON', 1, product.productId).subscribe((price) => {
+        console.log(price);
+        priceResult = price;
+        this.cartItems.push({ id: product.productId, qty: 1, name: product.name, price: priceResult.price });
+        this.total = 0;
+        this.cartItems.forEach(item => { this.total += item.price; });
+      });
+    }
+    else {
+      this.priceService.calculatePrice('CARTON', this.cartItems[cartItem].qty, product.productId).subscribe((price) => {
+        console.log(price);
+        priceResult = price;
+        this.cartItems[cartItem].price = priceResult.price;
+        this.total = 0;
+        this.cartItems.forEach(item => { this.total += item.price; });
+      });
+    }
 
   }
 
