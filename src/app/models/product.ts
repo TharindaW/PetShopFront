@@ -5,12 +5,15 @@ export class Product {
     rare: boolean;
     unitPerCarton: number;
     cartonPrice: number;
-    imageUrl: string;
+    imageURl: string;
 
-    constructor(id: number, name: string, price: number, units: number) {
+    constructor(id: number, name: string, description: string, rare: boolean, units: number, price: number, imageURl: string) {
         this.productId = id;
         this.name = name;
-        this.cartonPrice = price;
+        this.description = description;
+        this.rare = rare;
         this.unitPerCarton = units;
+        this.cartonPrice = price;
+        this.imageURl = imageURl;
     }
 }

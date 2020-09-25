@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Product } from 'src/app/models/product';
 import { Observable } from 'rxjs';
 
+
 const URL = 'http://localhost:8080/products';
 const URL_MOCK = 'https://48938d47-93e9-4f48-8877-232769f820bb.mock.pstmn.io/products';
 
@@ -25,6 +26,6 @@ export class ProductService {
 
 
 getProducts(): Observable < Product[] > {
-  return this.http.get<Product[]>(URL_MOCK);
+  return this.http.get<Product[]>(URL);
 }
 }
