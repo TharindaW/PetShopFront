@@ -20,7 +20,6 @@ export class CheckoutDataService {
 
   recieveDataCheckout() {
     console.log('recieveDataCheckout');
-    // console.log(this.subjectCart.asObservable());
     return this.subjectCart.asObservable();
   }
 }

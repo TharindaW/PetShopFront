@@ -19,24 +19,24 @@
                                 <!-- <app-checkout-item [cartItem]='item'></app-checkout-item> -->
                                 <td>
                                     <figure class="itemside align-items-center">
-                                        <div class="aside"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574342208/ra_unisex_tshirt_x2200_fafafa_ca443f4786_front-c_267_146_1000_1000-bg_f8f8f8.u1.jpg" class="img-sm"></div>
-                                        <figcaption class="info"> <a href="#" class="title text-dark" data-abc="true">Tshirt with round nect</a>
-                                            <p class="text-muted small">SIZE: L <br> Brand: MAXTRA {{item.product}} ds</p>
+                                        <div class="aside"><img src={{item.product.img}} class="img-sm"></div>
+                                        <figcaption class="info"> <a href="#" class="title text-dark" data-abc="true">{{item.product.name}}</a>
+                                            <p class="text-muted small">Units per carton: {{item.product.unitPerCarton}} <br> Carton Price:{{item.product.cartonPrice}}</p>
                                         </figcaption>
                                     </figure>
                                 </td>
                                 <td>
                                     <div class="def-number-input number-input safari_only">
-                                        <input class="btn btn-primary" min="0" name="quantity" value="1" type="number">
+                                        <input class="btn btn-primary" min="0" name="carton" value={{item.qty}} type="number">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="def-number-input number-input safari_only">
-                                        <input class="btn btn-primary" min="0" name="quantity" value="1" type="number">
+                                        <input class="btn btn-primary" min="0" name="unit" value={{item.qty}} type="number">
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="price-wrap"> <var class="price">$10.00</var> <small class="text-muted">
+                                    <div class="price-wrap"> <var class="price">{{item.price | currency: 'USD'}}</var> <small class="text-muted">
                                             $9.20 each </small> </div>
                                 </td>
                                 <td class="text-right d-none d-md-block"><a href="" class="btn btn-light" data-abc="true"> Remove</a> </td>
@@ -80,7 +80,8 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <dl class="dlist-align">
+                    <app-checkout-cart></app-checkout-cart>
+                    <!-- <dl class="dlist-align">
                         <dt>Total price:</dt>
                         <dd class="text-right ml-3">$69.97</dd>
                     </dl>
@@ -91,7 +92,7 @@
                     <dl class="dlist-align">
                         <dt>Total:</dt>
                         <dd class="text-right text-dark b ml-3"><strong>$59.97</strong></dd>
-                    </dl>
+                    </dl> -->
                     <hr> <a href="#" class="btn btn-out btn-primary btn-square btn-main" data-abc="true"> Make Purchase
                     </a> <a href="#" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continue
                         Shopping</a>

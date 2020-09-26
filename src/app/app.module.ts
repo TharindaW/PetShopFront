@@ -20,6 +20,8 @@ import { CheckoutDataService } from './services/checkout-data.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { CheckoutItemComponent } from './components/checkout/checkout-item/checkout-item.component';
+import { CheckoutCartComponent } from './components/checkout/checkout-cart/checkout-cart.component';
+// import { CheckoutItemResolver } from './models/checkout-Item-resolver';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { CheckoutItemComponent } from './components/checkout/checkout-item/check
     ProductComponent,
     MyLoaderComponent,
     CheckoutComponent,
-    CheckoutItemComponent
+    CheckoutItemComponent,
+    CheckoutCartComponent
   ],
   imports: [
     BrowserModule,
