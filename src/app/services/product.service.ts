@@ -26,6 +26,6 @@ export class ProductService {
 
 
 getProducts(): Observable < Product[] > {
-  return this.http.get<Product[]>(URL);
+  return this.http.get<Product[]>(URL_MOCK);
 }
 }
