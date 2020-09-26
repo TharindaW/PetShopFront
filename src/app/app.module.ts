@@ -15,6 +15,11 @@ import { ProductComponent } from './components/store/product-list/product/produc
 import { MyLoaderComponent } from './components/my-loader/my-loader.component';
 import { LoaderService } from './services/loader.service';
 import { LoaderInterceptorService } from './interceptors/loader-interceptor.service';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { CheckoutDataService } from './services/checkout-data.service';
+
+import { AppRoutingModule } from './app-routing.module';
+import { CheckoutItemComponent } from './components/checkout/checkout-item/checkout-item.component';
 
 @NgModule({
   declarations: [
@@ -27,13 +32,16 @@ import { LoaderInterceptorService } from './interceptors/loader-interceptor.serv
     ProductListComponent,
     CartComponent,
     ProductComponent,
-    MyLoaderComponent
+    MyLoaderComponent,
+    CheckoutComponent,
+    CheckoutItemComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
-  providers: [LoaderService,
+  providers: [LoaderService,CheckoutDataService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })

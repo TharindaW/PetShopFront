@@ -17,7 +17,7 @@ export class ProductListComponent implements OnInit {
       console.log(products);
       this.productList = products;
       this.productList.forEach(prod => {
-        console.log(prod.imageURl);
+        console.log(prod.img);
       });
     });
 
