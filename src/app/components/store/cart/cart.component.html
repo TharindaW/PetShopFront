@@ -6,8 +6,8 @@
 <ul *ngIf="cartItems.length > 0" class="list-group mb-3">
     <li *ngFor="let cartItem of cartItems" class="list-group-item d-flex justify-content-between lh-condensed">
         <div>
-            <h6 class="my-0">{{cartItem.name}} x {{cartItem.qty}}</h6>
-            <!-- <small class="text-muted">Brief description</small> -->
+            <h6 class="my-0">{{cartItem.product.name}}</h6>
+            <small class="text-muted">{{cartItem.carton}} Carton and {{cartItem.unit}} units</small>
         </div>
         <span class="text-muted">{{cartItem.price | currency: 'USD'}}</span>
     </li>

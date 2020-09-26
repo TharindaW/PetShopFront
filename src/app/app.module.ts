@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/shared/nav/nav.component';
@@ -42,7 +43,8 @@ import { CheckoutCartComponent } from './components/checkout/checkout-cart/check
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule ,
+    FormsModule
   ],
   providers: [LoaderService,CheckoutDataService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true }],

@@ -49,7 +49,7 @@ export class CheckoutCartComponent implements OnInit {
 
 
     if (!foundInCart) {
-      this.priceService.calculatePrice('CARTON', 1, product.productId).subscribe((price) => {
+      this.priceService.calculatePrice(cartItem).subscribe((price) => {
         console.log(price);
         priceResult = price;
         this.cartItems.push({ id: product.productId, qty: 1, name: product.name, price: priceResult.price });
@@ -59,7 +59,7 @@ export class CheckoutCartComponent implements OnInit {
       });
     }
     else {
-      this.priceService.calculatePrice('CARTON', this.cartItems[cartItem].qty, product.productId).subscribe((price) => {
+      this.priceService.calculatePrice(cartItem).subscribe((price) => {
         console.log(price);
         priceResult = price;
         this.cartItems[cartItem].price = priceResult.price;

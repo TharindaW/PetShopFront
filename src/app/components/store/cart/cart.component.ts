@@ -15,8 +15,7 @@ import { CheckoutDataService } from 'src/app/services/checkout-data.service';
 export class CartComponent implements OnInit {
 
 
-  cartItems = [];
-  cartItemsss: CartItem[] = [];
+  cartItems: CartItem[] = [];
   total = 0;
 
   constructor(private dataServiceCart: CartDataService,
@@ -25,20 +24,24 @@ export class CartComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.dataServiceCart.recieveData().subscribe((product: Product) => {
-      this.addProductToCart(product);
+    this.dataServiceCart.recieveData().subscribe((cart: CartItem) => {
+      this.addProductToCart(cart);
     });
   }
 
-  addProductToCart(product: Product) {
+  addProductToCart(cart: CartItem) {
 
-    let cartItem = null;
-
+    let existCartItem: CartItem = null;
     let foundInCart = false;
-    for (const i in this.cartItems) {
-      if (this.cartItems[i].id === product.productId) {
-        this.cartItems[i].qty++;
-        cartItem = i;
+
+    let index = 0;
+    for (const existCart of this.cartItems) {
+      index++;
+      if (existCart.product.productId === cart.product.productId) {
+
+        existCart.carton += cart.carton;
+        existCart.unit += cart.unit;
+        existCartItem = existCart;
         foundInCart = true;
         break;
       }
@@ -48,20 +51,24 @@ export class CartComponent implements OnInit {
 
 
     if (!foundInCart) {
-      this.priceService.calculatePrice('CARTON', 1, product.productId).subscribe((price) => {
+
+      this.priceService.calculatePrice(cart).subscribe((price) => {
         console.log(price);
         priceResult = price;
-        this.cartItems.push({ id: product.productId, qty: 1, name: product.name, price: priceResult.price });
+        // this.cartItems.push({ id: product.productId, qty: 1, name: product.name, price: priceResult.price });
+        cart.price = priceResult.price;
+        this.cartItems.push(cart);
         this.total = 0;
         this.cartItems.forEach(item => { this.total += item.price; });
-        this.cartItemsss.push(new CartItem(product, priceResult.price, 1));
       });
     }
     else {
-      this.priceService.calculatePrice('CARTON', this.cartItems[cartItem].qty, product.productId).subscribe((price) => {
+
+      this.priceService.calculatePrice(existCartItem).subscribe((price) => {
         console.log(price);
         priceResult = price;
-        this.cartItems[cartItem].price = priceResult.price;
+        existCartItem.price = priceResult.price;
+        this.cartItems[index - 1 ].price = priceResult.price;
         this.total = 0;
         this.cartItems.forEach(item => { this.total += item.price; });
       });
@@ -72,8 +79,8 @@ export class CartComponent implements OnInit {
   }
   sendDataToCheckout() {
     console.log('side cart');
-    console.log(this.cartItemsss);
-    this.dataServiceCheckout.sendDataToCheckout(this.cartItemsss);
+    console.log(this.cartItems);
+    this.dataServiceCheckout.sendDataToCheckout(this.cartItems);
     this.router.navigate(['/checkout']);
   }
 

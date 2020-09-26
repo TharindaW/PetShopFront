@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import {PriceResult} from '../models/price-result';
+import { CartItem } from '../models/cart-item';
 
 const BASE_URL = 'http://localhost:8080/calculate'; // ?productForm=CARTON&qty=3&productId=1';
 
@@ -14,8 +15,8 @@ export class PriceService {
   constructor(private http: HttpClient) { }
 
 
-  calculatePrice(form: string , qty: number , productId: number): Observable<PriceResult> {
-    const urlString = BASE_URL + '?productForm=' + form + '&qty=' + qty + '&productId=' + productId;
+  calculatePrice(cartItem: CartItem ): Observable<PriceResult> {
+    const urlString = BASE_URL + '?carton=' + cartItem.carton + '&unit=' + cartItem.unit + '&productId=' + cartItem.product.productId;
     console.log(urlString);
     return this.http.get<PriceResult>(urlString);
   }

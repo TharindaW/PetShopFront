@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Product } from 'src/app/models/product';
+import { CartItem } from 'src/app/models/cart-item';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +11,9 @@ export class CartDataService {
 
   constructor() { }
 
-  sendData(product: Product) {
-    console.log(product);
-    this.subjectProd.next(product);
+  sendData(cart: CartItem) {
+    console.log(cart);
+    this.subjectProd.next(cart);
   }
 
   recieveData() {
