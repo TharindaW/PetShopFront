@@ -21,18 +21,19 @@
                                     <figure class="itemside align-items-center">
                                         <div class="aside"><img src={{item.product.img}} class="img-sm"></div>
                                         <figcaption class="info"> <a href="#" class="title text-dark" data-abc="true">{{item.product.name}}</a>
-                                            <p class="text-muted small">Units per carton: {{item.product.unitPerCarton}} <br> Carton Price:{{item.product.cartonPrice}}</p>
+                                            <p class="text-muted small">Units per carton: {{item.product.unitPerCarton}}
+                                                <br> Carton Price:{{item.product.cartonPrice}}</p>
                                         </figcaption>
                                     </figure>
                                 </td>
                                 <td>
                                     <div class="def-number-input number-input safari_only">
-                                        <input class="btn btn-primary" min="0" name="carton" value={{item.qty}} type="number">
+                                        <input class="btn btn-primary" min="0" name="carton" value={{item.carton}} type="number">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="def-number-input number-input safari_only">
-                                        <input class="btn btn-primary" min="0" name="unit" value={{item.qty}} type="number">
+                                        <input class="btn btn-primary" min="0" name="unit" value={{item.unit}} type="number">
                                     </div>
                                 </td>
                                 <td>
