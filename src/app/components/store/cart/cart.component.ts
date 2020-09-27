@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Output , EventEmitter } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { CartDataService } from 'src/app/services/cart-data.service';
 import { PriceService } from 'src/app/services/price.service';
@@ -14,6 +14,7 @@ import { CheckoutDataService } from 'src/app/services/checkout-data.service';
 })
 export class CartComponent implements OnInit {
 
+  @Output() itemChange:EventEmitter<CartItem> = new EventEmitter<CartItem>();
 
   cartItems: CartItem[] = [];
   total = 0;
@@ -41,6 +42,7 @@ export class CartComponent implements OnInit {
 
         existCart.carton += cart.carton;
         existCart.unit += cart.unit;
+
         existCartItem = existCart;
         foundInCart = true;
         break;
@@ -60,6 +62,9 @@ export class CartComponent implements OnInit {
         this.cartItems.push(cart);
         this.total = 0;
         this.cartItems.forEach(item => { this.total += item.price; });
+
+        this.cartItems[index - 1 ].carton = priceResult.cartons;
+        this.cartItems[index - 1 ].unit = priceResult.units;
       });
     }
     else {
@@ -71,9 +76,15 @@ export class CartComponent implements OnInit {
         this.cartItems[index - 1 ].price = priceResult.price;
         this.total = 0;
         this.cartItems.forEach(item => { this.total += item.price; });
+
+
+        this.cartItems[index - 1 ].carton = priceResult.cartons;
+        this.cartItems[index - 1 ].unit = priceResult.units;
       });
+
     }
 
+    this.itemChange.emit( this.cartItems[index - 1 ] );
     // console.log( this.cartItemsss);
 
   }

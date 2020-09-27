@@ -17,22 +17,14 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     console.log('ngOnInit ');
 
-    // this.dataService.recieveDataCheckout().subscribe((items: CartItem[] ) => {
-    //   // this.cartItems = items;
-    //   console.log('Cart Item recieved to checkout : ' + items);
-    //   console.log(this.cartItems);
-    // },
-    // (error) => {
-    //   console.log('error', error);
-    // },
-    // () => {
-    //   console.log('completed');
-    // });
+    let total = 0;
 
-    this.dataService.recieveDataCheckout().subscribe((items: CartItem[]) =>  this.cartItems = items );
+    this.dataService.recieveDataCheckout().subscribe((items: CartItem[]) => this.cartItems = items);
 
     console.log('Checlout');
     console.log(this.cartItems);
+
+    this.cartItems.forEach(item => { this.total += item.price; });
   }
 
 }
