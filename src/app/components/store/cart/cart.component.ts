@@ -1,4 +1,4 @@
-import { Component, OnInit , Output , EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { CartDataService } from 'src/app/services/cart-data.service';
 import { PriceService } from 'src/app/services/price.service';
@@ -14,15 +14,15 @@ import { CheckoutDataService } from 'src/app/services/checkout-data.service';
 })
 export class CartComponent implements OnInit {
 
-  @Output() itemChange:EventEmitter<CartItem> = new EventEmitter<CartItem>();
+  @Output() itemChange: EventEmitter<CartItem> = new EventEmitter<CartItem>();
 
   cartItems: CartItem[] = [];
   total = 0;
 
   constructor(private dataServiceCart: CartDataService,
-              private dataServiceCheckout: CheckoutDataService,
-              private priceService: PriceService,
-              private router: Router) { }
+    private dataServiceCheckout: CheckoutDataService,
+    private priceService: PriceService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.dataServiceCart.recieveData().subscribe((cart: CartItem) => {
@@ -57,14 +57,17 @@ export class CartComponent implements OnInit {
       this.priceService.calculatePrice(cart).subscribe((price) => {
         console.log(price);
         priceResult = price;
-        // this.cartItems.push({ id: product.productId, qty: 1, name: product.name, price: priceResult.price });
+
         cart.price = priceResult.price;
+        cart.priceDetails = priceResult.resultDetails;
+        cart.carton = priceResult.cartons;
+        cart.unit = priceResult.units;
+        cart.priceDetails = priceResult.resultDetails;
+
         this.cartItems.push(cart);
         this.total = 0;
         this.cartItems.forEach(item => { this.total += item.price; });
 
-        this.cartItems[index - 1 ].carton = priceResult.cartons;
-        this.cartItems[index - 1 ].unit = priceResult.units;
       });
     }
     else {
@@ -72,19 +75,27 @@ export class CartComponent implements OnInit {
       this.priceService.calculatePrice(existCartItem).subscribe((price) => {
         console.log(price);
         priceResult = price;
+
         existCartItem.price = priceResult.price;
-        this.cartItems[index - 1 ].price = priceResult.price;
+        existCartItem.priceDetails = priceResult.resultDetails;
+        existCartItem.carton = priceResult.cartons;
+        existCartItem.unit = priceResult.units;
+        existCartItem.priceDetails = priceResult.resultDetails;
+
+        // this.cartItems[index - 1].price = priceResult.price;
+        // this.cartItems[index - 1].carton = priceResult.cartons;
+        // this.cartItems[index - 1].unit = priceResult.units;
+        // this.cartItems[index - 1].priceDetails = priceResult.resultDetails;
+
         this.total = 0;
         this.cartItems.forEach(item => { this.total += item.price; });
 
-
-        this.cartItems[index - 1 ].carton = priceResult.cartons;
-        this.cartItems[index - 1 ].unit = priceResult.units;
+        this.itemChange.emit(existCartItem);
       });
 
     }
 
-    this.itemChange.emit( this.cartItems[index - 1 ] );
+
     // console.log( this.cartItemsss);
 
   }

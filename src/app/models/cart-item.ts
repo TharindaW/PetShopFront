@@ -8,6 +8,7 @@ export class CartItem {
     unit: number;
 
     price: number;
+    priceDetails: string;
 
     constructor(prod: Product, carton: number, unit: number) {
 
