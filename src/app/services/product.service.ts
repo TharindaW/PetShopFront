@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 
 const URL = 'http://localhost:8080/products';
-const URL_MOCK = 'https://48938d47-93e9-4f48-8877-232769f820bb.mock.pstmn.io/products';
+const URL_MOCK = 'https://1be9e083-8bde-4239-9855-e2564fa39115.mock.pstmn.io/products';
 
 @Injectable({
   providedIn: 'root'

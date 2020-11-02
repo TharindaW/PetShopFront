@@ -23,6 +23,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CheckoutItemComponent } from './components/checkout/checkout-item/checkout-item.component';
 import { CheckoutCartComponent } from './components/checkout/checkout-cart/checkout-cart.component';
 import { CartItemComponent } from './components/store/cart/cart-item/cart-item.component';
+import { HelpComponent } from './help/help.component';
 // import { CheckoutItemResolver } from './models/checkout-Item-resolver';
 
 @NgModule({
@@ -40,7 +41,8 @@ import { CartItemComponent } from './components/store/cart/cart-item/cart-item.c
     CheckoutComponent,
     CheckoutItemComponent,
     CheckoutCartComponent,
-    CartItemComponent
+    CartItemComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
